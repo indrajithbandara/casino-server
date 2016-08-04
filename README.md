@@ -89,6 +89,17 @@ Now you can visit http://localhost:7000, it's a web-based game client for testin
 open http://localhost:7000/
 ```
 
+* Run on heroku:
+
+```bash
+git clone https://github.com/floatinghotpot/casino-server.git casino
+cd casino
+# heroku apps:create your-app-name
+# heroku addons:create rediscloud:30
+# heroku push heroku master
+```
+Now you can visit https://your-app-name.herokuapp.com/ to see
+
 # Available Options: #
 
 -p Port to use (defaults to 7000)

@@ -21,8 +21,8 @@ var out = process.stdout;
 if(argv.o) {
 	out = fs.createWriteStream(argv.o, { flags:'a' });
 }
-	
-var sub = redis.createClient(conf.redis.port, conf.redis.host, {});
+
+var sub = redis.createClient(conf.redis.uri, {no_ready_check: true})
 sub.on('error', function(err){
 	console.error('redis error (sub): ', err.stack);
 	out.write(now() + ', redis error: ' + err);
@@ -34,7 +34,7 @@ sub.on('subscribe', function(channel, count){
 
 function now() {
 	var d = new Date();
-	return d.getTime() + ', ' + 
+	return d.getTime() + ', ' +
 		d.getFullYear() + '/' + d.getMonth() + '/' + d.getDate() + ' ' +
 		d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds() + '.' + d.getMilliseconds();
 }
@@ -49,9 +49,9 @@ sub.subscribe('user:log');
 
 read({ prompt: '' }, function(err, input){
 	if(out !== process.stdout) out.end();
-	
+
 	process.exit(0);
-	
+
 	console.log( 'event-logger stopped.\n' );
 });
 

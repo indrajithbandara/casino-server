@@ -1,15 +1,13 @@
 exports = module.exports = {
 	server: {
-		port: 7000,
+		port: process.env.PORT || 7000,
 		host: '0.0.0.0',
 		hellomsg: 'welcome to online casino',
 		server: 20141201,
 		client_req: 20141130
 	},
 	redis: {
-		host: 'localhost',
-		port: 6379,
-		passwd: null
+		uri: process.env.REDISCLOUD_URL || 'localhost:6379',
 	},
 	new_user : {
 		coins: 10000,
